@@ -34,11 +34,12 @@ def histogram(source_text):
                 isIn = False
                 temp = list(histogram)
                 for item in temp:
-                    if item[0] == word:
-                        item[1]+=1
+                    temp2 = list(item)
+                    if temp2[0] == word:
+                        temp2[1]+=1
                         isIn = True
                 if isIn == False:
-                    temp.append([word, 1])
+                    temp.append((word, 1))
                 histogram = tuple(temp)
     return histogram
 
