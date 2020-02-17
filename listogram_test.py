@@ -34,7 +34,11 @@ class ListogramTest(unittest.TestCase):
             assert word in histogram
         # None of these words should be found
         for word in ('fishy', 'food'):
-            assert word not in histogram
+            isIn = False
+            for temp in histogram:
+                if temp[0] == word:
+                    isIn = True
+        assert isIn == False
 
     def test_frequency(self):
         histogram = Listogram(self.fish_words)
