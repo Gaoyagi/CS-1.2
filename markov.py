@@ -22,25 +22,34 @@ class MarkovChain:
             current_word = word_list[i]
             next_word = word_list[i+1]
 
-            #checks if crruent word is in the chain already
+            #checks if current word is in the chain already
             if current_word in markov_chain.keys():
                 #get the histogram(dic) for that word in the chain
                 histogram = markov_chain[current_word]
                 #finds the next_word in the histogram and adds to its weight (chance of it showing up enxt after current word)
-                histogram[next_word] = histogram.get(next_word, 0) + 1
+                histogram.add_count(next_word)
+                #histogram[next_word] = histogram[next_word].add_count(next_word)
             else: #first entry in the chain and creates a new dictionary with next_word as the first entry
                 markov_chain[current_word] = Dictogram([next_word])
+            print(markov_chain[current_word], "|")
 
         return markov_chain
 
     def walk(self, num_words):
-        #TODO: generate a sentence num_words long using the markov chain
+        #choose a random key from markov chain and makes a enw string
         sentence = random.choice(list(self.markov_chain))
+        #gets the dictionary at that randomized key
         current = self.markov_chain[sentence]
+        #loops through to g et as many words as num_words specifies
         for num in range(num_words):
+            print(current)
+            #randomly picks a key from the one of the inner dictionary
             word = current.sample()
+            #makes the new current dictionary the dic at the random word
             current = self.markov_chain[word]
+            #print(self.markov_chain[word].tokens)
             sentence += " " + word
+            #print(sentence)
         return sentence
         
 
