@@ -66,11 +66,12 @@ class LinkedList(object):
     def append(self, item):
         """Insert the given item at the tail of this linked list.
         TODO: Running time: O(???) Why and under what conditions?"""
-        #run time is O(1)
-        #set next item after last to the new item
-        self.tail.next = Node(item)
-        #set the pointer to the last item to the new item you jsut appended
-        self.tail = self.tail.next
+        if self.head == None:
+            self.head = Node(item)
+            self.tail = self.head
+        else:
+            self.tail.next = Node(item)
+            self.tail = self.tail.next
 
 
     def prepend(self, item):
@@ -86,6 +87,10 @@ class LinkedList(object):
         TODO: Worst case running time: O(???) Why and under what conditions?"""
         # TODO: Loop through all nodes to find item where quality(item) is True
         # TODO: Check if node's data satisfies given quality function
+        iterator = self.head
+        while iterator.data != quality:
+            iterator = iterator.next
+        return iterator
 
     def delete(self, item):
         """Delete the given item from this linked list, or raise ValueError.
@@ -95,6 +100,19 @@ class LinkedList(object):
         # TODO: Update previous node to skip around node with matching data
         # TODO: Otherwise raise error to tell user that delete has failed
         # Hint: raise ValueError('Item not found: {}'.format(item))
+        if self.head == None:
+            print("empty list")
+            return
+        else:
+            iterator = self.head
+            print(iterator.data)
+            #stops on the node right before the desired node
+            while iterator.next.data != item:
+                iterator = iterator.next
+            #makes the node right beofre next pointer equal to the node right after the desired node then deletes it
+            temp = iterator.next
+            iterator.next = temp.next
+            del temp
 
 
 def test_linked_list():
