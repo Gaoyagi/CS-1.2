@@ -2,7 +2,7 @@ from flask import Flask
 
 from listogram import Listogram
 from dictogram import Dictogram
-from markov import   Markov
+from markov import MarkovChain
 
 app = Flask(__name__)
 
