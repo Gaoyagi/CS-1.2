@@ -57,8 +57,11 @@ class LinkedList(object):
         TODO: Running time: O(???) Why and under what conditions?"""
         # TODO: Loop through all nodes and count one for each
         iterator = self.head
-        length = 1
-        while iterator.next != None:
+        length = 0
+        if self.head == None:
+            print("empty list")
+            return
+        while iterator != None:
             length+=1
             iterator = iterator.next
         return length
@@ -77,9 +80,13 @@ class LinkedList(object):
     def prepend(self, item):
         """Insert the given item at the head of this linked list.
         TODO: Running time: O(???) Why and under what conditions?"""
-        temp = self.head
-        self.head = Node(item)
-        self.head.next = temp
+        if self.head == None:
+            self.head = Node(item)
+            self.tail = self.head
+        else:
+            temp = self.head
+            self.head = Node(item)
+            self.head.next = temp
 
     def find(self, quality):
         """Return an item from this linked list satisfying the given quality.
@@ -87,32 +94,57 @@ class LinkedList(object):
         TODO: Worst case running time: O(???) Why and under what conditions?"""
         # TODO: Loop through all nodes to find item where quality(item) is True
         # TODO: Check if node's data satisfies given quality function
-        iterator = self.head
-        while iterator.data != quality:
-            iterator = iterator.next
-        return iterator
-
-    def delete(self, item):
-        """Delete the given item from this linked list, or raise ValueError.
-        TODO: Best case running time: O(???) Why and under what conditions?
-        TODO: Worst case running time: O(???) Why and under what conditions?"""
-        # TODO: Loop through all nodes to find one whose data matches given item
-        # TODO: Update previous node to skip around node with matching data
-        # TODO: Otherwise raise error to tell user that delete has failed
-        # Hint: raise ValueError('Item not found: {}'.format(item))
         if self.head == None:
             print("empty list")
             return
         else:
             iterator = self.head
-            print(iterator.data)
             #stops on the node right before the desired node
-            while iterator.next.data != item:
+            while iterator !=  None:
+                if iterator.data == quality:
+                    return iterator
                 iterator = iterator.next
-            #makes the node right beofre next pointer equal to the node right after the desired node then deletes it
-            temp = iterator.next
-            iterator.next = temp.next
-            del temp
+            print("item not found")
+    def delete(self, item):
+        """Delete the given item from this linked list, or raise ValueError.
+        TODO: Best case running time: O(???) Why and under what conditions?
+        TODO: Worst case running time: O(???) Why and under what conditions?"""
+        
+        #checks for empty list
+        if self.head == None:
+            print("empty list")
+            return
+        else:
+            #edgge case where the item youre looking for is the first item
+            if self.head.data == item:
+                temp = self.head            #creates node to be deleted
+                self.head = self.head.next  #sets head to the  next node
+                del temp                    #deletes temp node
+                #edge case if that was the last node
+                if self.head == None:
+                    self.tail = self.head
+                return
+            iterator = self.head    #pointer to iterate  through  list
+            found = False
+            #loops through list and stops on the node right before the desired node
+            while iterator.next !=  None:
+                if iterator.next.data == item:
+                    found = True
+                    break
+                iterator = iterator.next
+            if found:
+                #edge case for if the item youre looking for is the last item
+                if iterator.next == self.tail:
+                    temp = self.tail
+                    self.tail = iterator
+                    del temp
+                    return
+                #makes the node right beofre next pointer equal to the node right after the desired node then deletes it    
+                temp = iterator.next
+                iterator.next = temp.next
+                del temp
+            else:
+                print("Item not found")
 
 
 def test_linked_list():
@@ -130,7 +162,7 @@ def test_linked_list():
     print('length: {}'.format(ll.length()))
 
     # Enable this after implementing delete method
-    delete_implemented = False
+    delete_implemented = True
     if delete_implemented:
         print('\nTesting delete:')
         for item in ['B', 'C', 'A']:

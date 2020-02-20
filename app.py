@@ -7,17 +7,17 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return 'Hello, World!'
+    return 'MEMEMEMEMEMEMEMEMEMEMEME'
 
 @app.route('/listogram')
 def lists():
-    fish_text = 'one fish two fish red fish blue fish'
-    return Listogram(fish_text)  
+    temp = Listogram('one fish two fish red fish blue fish'.split()) 
+    return temp.generate_sentence(10)
 
 @app.route('/dictogram')
 def Dicts():
-    fish_text = 'one fish two fish red fish blue fish'
-    return Dictogram(fish_text)
+    temp = Dictogram('one fish two fish red fish blue fish'.split())  
+    return temp.generate_sentence(10)
 
 @app.route('/markov')
 def hello_world():

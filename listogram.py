@@ -62,24 +62,12 @@ class Listogram(list):
                 return words[0]
 
 
-
-    # def percentages(self):
-    #     length = 0
-    #     for item in self.listogram:
-    #         length+=item[1]
-    #     for item in self.listogram:
-    #         item.append(item[1]/length)
-    #         print(f"{item[0]} ==> {item[2]}")
-    #     return length
-
-    # def weightedRandom(self):
-    #     chosen = random.randint(0, self.length)
-    #     print(chosen)
-    #     indexes = 0
-    #     for words in self.listogram:
-    #         indexes+=words[1]
-    #         if indexes>chosen:
-    #             return words[0]
+    def generate_sentence(self, num):
+        sentence = ""
+        for _ in range(num):
+            sentence+=" " + self.sample()
+        print(sentence)
+        return sentence
 
 
 
@@ -154,4 +142,4 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+     main()

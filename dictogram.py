@@ -48,6 +48,12 @@ class Dictogram(dict):
                 #print(word)
                 return word
 
+    def generate_sentence(self, num):
+        sentence = ""
+        for _ in range(num):
+            sentence+=" " + self.sample()
+        print(sentence)
+        return sentence
 
 def print_histogram(word_list):
     print()
