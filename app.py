@@ -2,6 +2,7 @@ from flask import Flask
 
 from listogram import Listogram
 from dictogram import Dictogram
+from markov import   Markov
 
 app = Flask(__name__)
 
@@ -21,4 +22,5 @@ def Dicts():
 
 @app.route('/markov')
 def hello_world():
-    return 'in progress'
+    temp = Markov('one fish two fish red fish blue fish'.split())
+    return 
