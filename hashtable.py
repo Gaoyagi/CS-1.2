@@ -26,7 +26,7 @@ class HashTable(object):
 
     def keys(self):
         """Return a list of all keys in this hash table.
-        TODO: Running time: O(???) Why and under what conditions?"""
+        TODO: Running time: O(???) Why and under what conditions?""" 
         # Collect all keys in each bucket
         all_keys = []
         for bucket in self.buckets:
@@ -39,6 +39,17 @@ class HashTable(object):
         TODO: Running time: O(???) Why and under what conditions?"""
         # TODO: Loop through all buckets
         # TODO: Collect all values in each bucket
+        keys = self.keys()  #get an array of all the keys
+        values = []         #array that will hold all the values
+        #loop through all the keys to get all the values
+        for key in keys:
+            iterate = buckets[key].head     #iterator pointer to go through each buckets linked list
+            #loops through linked list
+            while iterate != None:
+                values.append(iterate.data) #append each node's data to the value's list  
+                iterate = iterate.next      #go to next node in LL
+        return values
+
 
     def items(self):
         """Return a list of all items (key-value pairs) in this hash table.
@@ -54,12 +65,27 @@ class HashTable(object):
         TODO: Running time: O(???) Why and under what conditions?"""
         # TODO: Loop through all buckets
         # TODO: Count number of key-value entries in each bucket
+        bucketLength = {}
+        keys = self.keys()  #get an array of all the keys
+        for key in keys:
+            bucketLength[key] = 0
+            iterate = buckets[key].head     #iterator pointer to go through each buckets linked list
+            #loops through linked list
+            while iterate != None:
+                bucketLength[key]+=1
+                iterate = iterate.next      #go to next node in LL
+        return bucketLength
 
     def contains(self, key):
         """Return True if this hash table contains the given key, or False.
         TODO: Running time: O(???) Why and under what conditions?"""
         # TODO: Find bucket where given key belongs
         # TODO: Check if key-value entry exists in bucket
+        keys = self.keys()  #get an array of all the keys
+        if key in keys:
+            return True
+        else:
+            return False
 
     def get(self, key):
         """Return the value associated with the given key, or raise KeyError.
@@ -69,6 +95,10 @@ class HashTable(object):
         # TODO: If found, return value associated with given key
         # TODO: Otherwise, raise error to tell user get failed
         # Hint: raise KeyError('Key not found: {}'.format(key))
+        if buckets[key] != None:
+
+        else: 
+            raise KeyError("Key doesnt exist")
 
     def set(self, key, value):
         """Insert or update the given key with its associated value.

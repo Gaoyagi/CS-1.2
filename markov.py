@@ -40,7 +40,7 @@ class MarkovChain:
         sentence = random.choice(list(self.markov_chain))
         #gets the dictionary at that randomized key
         current = self.markov_chain[sentence]
-        #loops through to g et as many words as num_words specifies
+        #loops through to get as many words as num_words specifies
         for num in range(num_words):
             print(current)
             #randomly picks a key from the one of the inner dictionary

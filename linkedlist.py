@@ -54,13 +54,12 @@ class LinkedList(object):
 
     def length(self):
         """Return the length of this linked list by traversing its nodes.
-        TODO: Running time: O(???) Why and under what conditions?"""
+        TODO: Running time: O(???) Why and under what conditions?   O(n)"""
         # TODO: Loop through all nodes and count one for each
         iterator = self.head
         length = 0
         if self.head == None:
-            print("empty list")
-            return
+            return 0
         while iterator != None:
             length+=1
             iterator = iterator.next
@@ -101,10 +100,12 @@ class LinkedList(object):
             iterator = self.head
             #stops on the node right before the desired node
             while iterator !=  None:
-                if iterator.data == quality:
-                    return iterator
+                if quality(iterator.data):
+                    return iterator.data
                 iterator = iterator.next
             print("item not found")
+            return None
+
     def delete(self, item):
         """Delete the given item from this linked list, or raise ValueError.
         TODO: Best case running time: O(???) Why and under what conditions?
@@ -112,14 +113,11 @@ class LinkedList(object):
         
         #checks for empty list
         if self.head == None:
-            print("empty list")
-            return
+            raise ValueError("empty list")
         else:
-            #edgge case where the item youre looking for is the first item
+            #edge case where the item youre looking for is the first item
             if self.head.data == item:
-                temp = self.head            #creates node to be deleted
                 self.head = self.head.next  #sets head to the  next node
-                del temp                    #deletes temp node
                 #edge case if that was the last node
                 if self.head == None:
                     self.tail = self.head
@@ -128,23 +126,23 @@ class LinkedList(object):
             found = False
             #loops through list and stops on the node right before the desired node
             while iterator.next !=  None:
+                #check if next node has the desired data
                 if iterator.next.data == item:
                     found = True
                     break
-                iterator = iterator.next
+                iterator = iterator.next    #go to next node
             if found:
                 #edge case for if the item youre looking for is the last item
                 if iterator.next == self.tail:
-                    temp = self.tail
                     self.tail = iterator
-                    del temp
+                    iterator.next = None
                     return
                 #makes the node right beofre next pointer equal to the node right after the desired node then deletes it    
                 temp = iterator.next
                 iterator.next = temp.next
                 del temp
             else:
-                print("Item not found")
+                raise ValueError("Item not found")
 
 
 def test_linked_list():
