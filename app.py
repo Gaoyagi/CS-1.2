@@ -23,4 +23,4 @@ def Dicts():
 @app.route('/markov')
 def hello_world():
     temp = MarkovChain('one fish two fish red fish blue fish'.split())
-    return 
+    return temp.walk(5)
