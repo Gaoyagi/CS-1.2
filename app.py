@@ -22,5 +22,5 @@ def Dicts():
 
 @app.route('/markov')
 def hello_world():
-    temp = Markov('one fish two fish red fish blue fish'.split())
+    temp = MarkovChain('one fish two fish red fish blue fish'.split())
     return 
